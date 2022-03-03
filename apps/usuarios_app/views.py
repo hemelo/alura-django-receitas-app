@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.models import User
 from django.contrib import auth
 from receitas_app.models import Receita 
-from usuarios_app.forms import CadastroForm, LoginFromEmailForm, NovaReceita
+from .forms import CadastroForm, LoginFromEmailForm
 
 # Create your views here.
 
@@ -57,29 +57,3 @@ def dashboard(request):
 def logout(request):
     auth.logout(request)
     return redirect('index')
-
-def nova_receita(request):
-    if request.method == 'POST':
-        form = NovaReceita(request.POST, request.FILES)
-        if form.is_valid():
-            user = get_object_or_404(User, pk=request.user.id)
-            receita = Receita.objects.create(
-                autor=user, 
-                nome=form.cleaned_data.get('nome'),
-                ingredientes=form.cleaned_data.get('ingredientes'),
-                modo_preparo=form.cleaned_data.get('modo_preparo'),
-                tempo_preparo=form.cleaned_data.get('tempo_preparo'),
-                rendimento=form.cleaned_data.get('rendimento'),
-                categoria=form.cleaned_data.get('categoria'),
-                foto_receita=form.cleaned_data.get('foto_receita'),
-                )
-            receita.save()
-
-            return redirect('index')
-        else:
-            data = { 'form': form }
-            return render(request, "cria_receita.html", data)
-
-    form = NovaReceita()
-    data = { 'form': form }
-    return render(request, "cria_receita.html", data)
