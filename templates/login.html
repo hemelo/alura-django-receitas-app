@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<!-- ##### Contact Form Area Start ##### -->
+<div class="contact-area section-padding-0-80">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="section-heading">
+                    <h2>Login</h2>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <div class="contact-form-area">
+                    <form action="{% url 'login' %}" method="POST"> {% csrf_token %}
+                        <div class="row">
+                            {% for field in form.visible_fields %}
+                          
+                            <div class="col-12">
+                                <label for="{{ field.id_for_label }}"><b>{{ field.label }}</b></label>
+                                {{ field }}
+                            </div>
+                            {% endfor %}
+                            {% if form.errors %}
+                            <div class="col-12">
+                                <ul class="alert alert-danger">
+                                    {% for key,value in form.errors.items %} 
+                                    <li>{{ value|escape }}</li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                            {% endif %} 
+                            <div class="col-12 text-center">
+                                <button class="btn btn-success" type="submit">Acessar sua conta</button>
+                                <button type="button" class="btn btn-primary" onclick="exibirCriarConta()">Ainda não tem conta? Clique aqui</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+function exibirCriarConta()
+{
+     location.href = "{% url 'cadastro' %}";
+} 
+</script>
+
+{% endblock %}

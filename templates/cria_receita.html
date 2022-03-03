@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<!-- ##### Contact Form Area Start ##### -->
+<div class="contact-area section-padding-0-80">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="section-heading">
+                    <h3>Crie sua receita, {{ user.get_full_name }} :)</h3>
+                </div>
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-12">
+                <p>Todos os campos são obrigatórios</p>
+                <div class="contact-form-area">
+                    <form action="{% url 'nova_receita' %}" method="POST" enctype="multipart/form-data">{% csrf_token %}
+                        <div class="row">
+                            <div class="col-12 col-lg-12">
+                                <label for="{{ form.nome.id_for_label }}"><b>{{ form.nome.label }}</b></label>
+                                {{ form.nome }}
+                            </div>
+                            <div class="col-12">
+                                <label for="{{ form.ingredientes.id_for_label }}"><b>{{ form.ingredientes.label }}</b></label>
+                                {{ form.ingredientes }}
+                            </div>
+                            <div class="col-12">
+                                <label for="{{ form.modo_preparo.id_for_label }}"><b>{{ form.modo_preparo.label }}</b></label>
+                                {{ form.modo_preparo }}                           
+                            </div>
+                            <div class="col-12 col-lg-3">
+                                <label for="{{ form.tempo_preparo.id_for_label }}"><b>{{ form.tempo_preparo.label }}</b></label>
+                                {{ form.tempo_preparo }}                                  
+                            </div>
+                            <div class="col-12 col-lg-3">
+                                <label for="{{ form.rendimento.id_for_label }}"><b>{{ form.rendimento.label }}</b></label>
+                                {{ form.rendimento }}                              
+                            </div>
+                            <div class="col-12 col-lg-3">
+                                <label for="{{ form.categoria.id_for_label }}"><b>{{ form.categoria.label }}</b></label>
+                                {{ form.categoria }}                             
+                            </div>
+                            <div class="col-12 col-lg-3">
+                                <label for="{{ form.foto_receita.id_for_label }}"><b>{{ form.foto_receita.label }}</b></label>
+                                {{ form.foto_receita }}  
+                            </div>
+                            {% if form.errors %}
+                            <div class="col-12">
+                                <ul class="alert alert-danger">
+                                    {% for key,value in form.errors.items %} 
+                                    <li>{{ key }} : {{ value }}</li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                            {% endif %} 
+                            <div class="col-12 text-center">
+                                <button class="btn delicious-btn mt-30" type="submit">Criar sua receita</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
