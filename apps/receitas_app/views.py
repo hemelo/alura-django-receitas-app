@@ -11,7 +11,7 @@ def index(request):
     paginator = Paginator(receitas, 12)
     page = request.GET.get('page')
     receitas_per_page = paginator.get_page(page)
-
+    
     if 'search' in request.GET:
         search = request.GET['search']
         receitas = receitas.filter(nome__icontains=search).filter(publicada=True)
