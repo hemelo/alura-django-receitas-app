@@ -12,7 +12,7 @@ WebApp de Receitas feito em alguns dos cursos do framework Django na Alura. O ap
 - Python pra Web
 - Framework Django e a facilidade que é utilizá-lo, já que vem com sistema admin embutido
 - Django Html
-- Mudança na forma de exibição de dados no painel admin
+- Como mudar a forma de exibição de dados no painel admin
 
 ## Fotos do site de Receitas
 
